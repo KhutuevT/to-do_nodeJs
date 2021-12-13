@@ -12,7 +12,6 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 //middleware
 app.use(express.json());
 app.use(cors());
-
 app.use("/", apiRoutes);
 
 app.listen(PORT, () => {
