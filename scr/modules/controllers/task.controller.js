@@ -15,29 +15,36 @@ module.exports.createTask = (req, res, next) => {
   } else res.status(422).send("Wrong data");
 };
 
-module.exports.updateTaskText = (req, res, next) => {
-  if (req.body.text.trim().length && req.body.id.trim().length) {
-    const { id, text } = req.body;
-    Task.updateOne({ _id: id }, { text: text })
-      .then((result) => {
-        res.send("Task update");
-      })
-      .catch((err) => {
-        res.send(err);
-      });
-  } else res.status(422).send("Wrong data");
-};
-
-module.exports.updateTaskIsCheck = (req, res, next) => {
-  if (typeof (req.body.isCheck === "boolean") && req.body.id.trim().length) {
-    const { id, isCheck } = req.body;
-    Task.updateOne({ _id: id }, { isCheck: isCheck })
-      .then((result) => {
-        res.send("Task update");
-      })
-      .catch((err) => {
-        res.send(err);
-      });
+module.exports.updateTask = (req, res, next) => {
+  if (req.body.hasOwnProperty("id")) {
+    if (req.body.hasOwnProperty("text") && req.body.hasOwnProperty("isCheck")) {
+      const { id, text, isCheck } = req.body;
+      Task.updateOne({ _id: id }, { text: text, isCheck: isCheck })
+        .then((result) => {
+          res.send("Task update");
+        })
+        .catch((err) => {
+          res.send(err);
+        });
+    } else if (req.body.hasOwnProperty("text")) {
+      const { id, text } = req.body;
+      Task.updateOne({ _id: id }, { text: text })
+        .then((result) => {
+          res.send("Task update");
+        })
+        .catch((err) => {
+          res.send(err);
+        });
+    } else if (req.body.hasOwnProperty("isCheck")) {
+      const { id, isCheck } = req.body;
+      Task.updateOne({ _id: id }, { isCheck: isCheck })
+        .then((result) => {
+          res.send("Task update");
+        })
+        .catch((err) => {
+          res.send(err);
+        });
+    }
   } else res.status(422).send("Wrong data");
 };
 
