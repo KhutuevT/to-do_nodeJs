@@ -45,7 +45,7 @@ module.exports.updateTask = (req, res, next) => {
           res.send(err);
         });
     }
-  } else res.status(422).send("Wrong data");
+  } else res.status(422).send("Wrong data!");
 };
 
 module.exports.deleteTask = (req, res, next) => {
