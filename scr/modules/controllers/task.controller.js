@@ -16,7 +16,7 @@ module.exports.createTask = (req, res, next) => {
 };
 
 module.exports.updateTaskText = (req, res, next) => {
-  if (req.body.text.trim().length) {
+  if (req.body.text.trim().length && req.body.id.trim().length) {
     const { id, text } = req.body;
     Task.updateOne({ _id: id }, { text: text })
       .then((result) => {
@@ -29,7 +29,7 @@ module.exports.updateTaskText = (req, res, next) => {
 };
 
 module.exports.updateTaskIsCheck = (req, res, next) => {
-  if (typeof (req.body.isCheck === "boolean")) {
+  if (typeof (req.body.isCheck === "boolean") && req.body.id.trim().length) {
     const { id, isCheck } = req.body;
     Task.updateOne({ _id: id }, { isCheck: isCheck })
       .then((result) => {
