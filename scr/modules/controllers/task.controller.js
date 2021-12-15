@@ -17,8 +17,8 @@ module.exports.createTask = (req, res, next) => {
 
 module.exports.updateTask = (req, res, next) => {
   if (
-    (req.body.hasOwnProperty("id") && req.body.hasOwnProperty("text")) ||
-    req.body.hasOwnProperty("isCheck")
+    req.body.hasOwnProperty("id") &&
+    (req.body.hasOwnProperty("text") || req.body.hasOwnProperty("isCheck"))
   ) {
     body = req.body;
     Task.updateOne({ _id: body.id }, body)
