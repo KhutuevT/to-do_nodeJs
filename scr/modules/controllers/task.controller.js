@@ -15,7 +15,6 @@ module.exports.createTask = (req, res, next) => {
   } else res.status(422).send("Wrong data");
 };
 
-
 module.exports.updateTask = (req, res, next) => {
   if (
     (req.body.hasOwnProperty("id") && req.body.hasOwnProperty("text")) ||
