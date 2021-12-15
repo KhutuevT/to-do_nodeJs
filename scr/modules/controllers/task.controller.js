@@ -15,36 +15,20 @@ module.exports.createTask = (req, res, next) => {
   } else res.status(422).send("Wrong data");
 };
 
+
 module.exports.updateTask = (req, res, next) => {
-  if (req.body.hasOwnProperty("id")) {
-    if (req.body.hasOwnProperty("text") && req.body.hasOwnProperty("isCheck")) {
-      const { id, text, isCheck } = req.body;
-      Task.updateOne({ _id: id }, { text: text, isCheck: isCheck })
-        .then((result) => {
-          res.send("Task update");
-        })
-        .catch((err) => {
-          res.send(err);
-        });
-    } else if (req.body.hasOwnProperty("text")) {
-      const { id, text } = req.body;
-      Task.updateOne({ _id: id }, { text: text })
-        .then((result) => {
-          res.send("Task update");
-        })
-        .catch((err) => {
-          res.send(err);
-        });
-    } else if (req.body.hasOwnProperty("isCheck")) {
-      const { id, isCheck } = req.body;
-      Task.updateOne({ _id: id }, { isCheck: isCheck })
-        .then((result) => {
-          res.send("Task update");
-        })
-        .catch((err) => {
-          res.send(err);
-        });
-    }
+  if (
+    (req.body.hasOwnProperty("id") && req.body.hasOwnProperty("text")) ||
+    req.body.hasOwnProperty("isCheck")
+  ) {
+    body = req.body;
+    Task.updateOne({ _id: body.id }, body)
+      .then((result) => {
+        res.send("Task update");
+      })
+      .catch((err) => {
+        res.send(err);
+      });
   } else res.status(422).send("Wrong data!");
 };
 
